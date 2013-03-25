@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="org.obeonetwork.angularjs.eclipse.tools.ide.ui.category"
+            name="%AngularJS-Wizard-Category-Name">
+      </category>
+      <wizard
+            category="org.obeonetwork.angularjs.eclipse.tools.ide.ui.category"
+            class="org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.wizards.project.AngularJSProjectWizard"
+            hasPages="true"
+            icon="icons/wizards/AngularJS-Wizard-Project-Icon.png"
+            id="org.obeonetwork.angularjs.eclipse.tools.ide.ui.project"
+            name="%AngularJS-Wizard-Project-Name"
+            project="true">
+         <description>
+            %AngularJS-Wizard-Project-Description
+         </description>
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.ide.projectNatureImages">
+      <image
+            icon="icons/logo/AngularJS-Shield_8x8.png"
+            id="org.obeonetwork.angularjs.eclipse.tools.ide.ui.image"
+            natureId="org.obeonetwork.angularjs.eclipse.tools.nature">
+      </image>
+   </extension>
+
+</plugin>

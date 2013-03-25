@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.obeonetwork.angularjs.eclipse.tools.feature_1.0.0.qualifier.jar" id="org.obeonetwork.angularjs.eclipse.tools.feature" version="1.0.0.qualifier">
+      <category name="org.obeonetwork.angularjs.eclipse.tools"/>
+   </feature>
+   <category-def name="org.obeonetwork.angularjs.eclipse.tools" label="AngularJS Eclipse Tools">
+      <description>
+         This project contains all the necessary tools to start working on an AngularJS-based application in Eclipse.
+      </description>
+   </category-def>
+</site>

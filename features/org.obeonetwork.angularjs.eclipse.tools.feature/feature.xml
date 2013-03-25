@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.obeonetwork.angularjs.eclipse.tools.feature"
+      label="%Feature-Name"
+      version="1.0.0.qualifier"
+      provider-name="%Feature-Vendor"
+      plugin="org.obeonetwork.angularjs.eclipse.tools.documentation">
+
+   <description url="">
+      %Description
+   </description>
+
+   <copyright url="">
+      %Copyright
+   </copyright>
+
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      %License
+   </license>
+
+   <plugin
+         id="org.obeonetwork.angularjs.eclipse.tools.ide.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.obeonetwork.angularjs.eclipse.tools.ide.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.obeonetwork.angularjs.eclipse.tools.documentation"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+</feature>

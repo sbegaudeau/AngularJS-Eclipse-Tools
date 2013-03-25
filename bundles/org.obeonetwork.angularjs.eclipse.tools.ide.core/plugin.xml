@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         id="org.obeonetwork.angularjs.eclipse.tools.nature"
+         name="%AngularJS-Project-Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="org.obeonetwork.angularjs.eclipse.tools.ide.core.internal.nature.AngularJSProjectNature">
+         </run>
+      </runtime>
+   </extension>
+   <extension
+         id="org.obeonetwork.angularjs.eclipse.tools.builder"
+         name="%AngularJS-Project-Builder"
+         point="org.eclipse.core.resources.builders">
+      <builder
+            callOnEmptyDelta="true"
+            hasNature="true">
+         <run
+               class="org.obeonetwork.angularjs.eclipse.tools.ide.core.internal.builder.AngularJSProjectBuilder">
+         </run>
+      </builder>
+   </extension>
+
+</plugin>

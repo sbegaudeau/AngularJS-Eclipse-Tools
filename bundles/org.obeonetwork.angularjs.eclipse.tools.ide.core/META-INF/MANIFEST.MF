@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %Bundle-Name
+Bundle-SymbolicName: org.obeonetwork.angularjs.eclipse.tools.ide.core;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: %Bundle-Vendor
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-Localization: plugin
+Export-Package: org.obeonetwork.angularjs.eclipse.tools.ide.core.internal;version="1.0.0";x-internal:=true,
+ org.obeonetwork.angularjs.eclipse.tools.ide.core.internal.builder;version="1.0.0";x-internal:=true,
+ org.obeonetwork.angularjs.eclipse.tools.ide.core.internal.nature;version="1.0.0";x-internal:=true,
+ org.obeonetwork.angularjs.eclipse.tools.ide.core.internal.project;version="1.0.0";x-friends:="org.obeonetwork.angularjs.eclipse.tools.ide.ui",
+ org.obeonetwork.angularjs.eclipse.tools.ide.core.utils;version="1.0.0"
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.core.resources
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.obeonetwork.angularjs.eclipse.tools.ide.core.internal.AngularJSIDECorePlugin
