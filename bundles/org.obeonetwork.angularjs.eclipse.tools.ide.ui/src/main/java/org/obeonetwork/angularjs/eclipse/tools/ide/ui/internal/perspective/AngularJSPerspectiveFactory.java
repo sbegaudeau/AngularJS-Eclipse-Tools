@@ -8,24 +8,24 @@
  * Contributors:
  *     Stephane Begaudeau (Obeo) - initial API and implementation
  *******************************************************************************/
-package org.obeonetwork.angularjs.eclipse.tools.ide.core.utils;
+package org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.perspective;
+
+import org.eclipse.ui.IPageLayout;
+import org.eclipse.ui.IPerspectiveFactory;
 
 /**
  * @author <a href="mailto:stephane.begaudeau@obeo.fr">Stephane Begaudeau</a>
  */
-public interface IAngularJSConstants {
-	/**
-	 * The identifier of the nature.
-	 */
-	String NATURE_ID = "org.obeonetwork.angularjs.eclipse.tools.nature"; //$NON-NLS-1$
+public class AngularJSPerspectiveFactory implements IPerspectiveFactory {
 
 	/**
-	 * The identifier of the builder.
+	 * {@inheritDoc}
+	 * 
+	 * @see org.eclipse.ui.IPerspectiveFactory#createInitialLayout(org.eclipse.ui.IPageLayout)
 	 */
-	String BUILDER_ID = "org.obeonetwork.angularjs.eclipse.tools.builder"; //$NON-NLS-1$
+	@Override
+	public void createInitialLayout(IPageLayout layout) {
+		// Initialize the layout of the perspective
+	}
 
-	/**
-	 * The filename of the package.json file.
-	 */
-	String PACKAGE_JSON_FILENAME = "package.json"; //$NON-NLS-1$
 }

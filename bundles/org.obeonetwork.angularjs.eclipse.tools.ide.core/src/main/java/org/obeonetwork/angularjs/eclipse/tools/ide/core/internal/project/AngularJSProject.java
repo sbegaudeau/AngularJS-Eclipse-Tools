@@ -10,11 +10,18 @@
  *******************************************************************************/
 package org.obeonetwork.angularjs.eclipse.tools.ide.core.internal.project;
 
+import com.google.common.collect.Lists;
+
+import java.io.ByteArrayInputStream;
+import java.util.List;
+
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.obeonetwork.angularjs.eclipse.tools.ide.core.internal.AngularJSIDECorePlugin;
+import org.obeonetwork.angularjs.eclipse.tools.ide.core.utils.IAngularJSConstants;
 
 /**
  * @author <a href="mailto:stephane.begaudeau@obeo.fr">Stephane Begaudeau</a>
@@ -64,6 +71,22 @@ public class AngularJSProject {
 
 				IFolder viewsFolder = appFolder.getFolder("views"); //$NON-NLS-1$
 				viewsFolder.create(true, false, monitor);
+
+				String lineSeparator = System.lineSeparator();
+
+				String appJsContent = this.createApplication("angularJsEclipseTools", Lists //$NON-NLS-1$
+						.newArrayList(new AngularJSRouteMapping("/:path", "views/main.html", //$NON-NLS-1$ //$NON-NLS-2$
+								"MainCtrl")), "/404.html", lineSeparator); //$NON-NLS-1$ //$NON-NLS-2$
+
+				IFile appJsFile = scriptsFolder.getFile("app.js"); //$NON-NLS-1$
+				appJsFile.create(new ByteArrayInputStream(appJsContent.getBytes()), true, monitor);
+
+				String mainControllerJsContent = this.createController("MainCtrl", "angularJsEclipseTools",
+						Lists.newArrayList("$scope"), lineSeparator);
+
+				IFile mainJsFile = controllersFolder.getFile("main.js");
+				mainJsFile
+						.create(new ByteArrayInputStream(mainControllerJsContent.getBytes()), true, monitor);
 			} catch (CoreException e) {
 				AngularJSIDECorePlugin.log(e, true);
 			}
@@ -92,5 +115,162 @@ public class AngularJSProject {
 				AngularJSIDECorePlugin.log(e, true);
 			}
 		}
+
+		try {
+			String packageJsonContent = this.createPackageJson();
+			IFile packageJsonFile = this.project.getFile(IAngularJSConstants.PACKAGE_JSON_FILENAME);
+			packageJsonFile.create(new ByteArrayInputStream(packageJsonContent.getBytes()), true, monitor);
+		} catch (CoreException e) {
+			AngularJSIDECorePlugin.log(e, true);
+		}
+
+	}
+
+	/**
+	 * Returns the content of an AngularJS application.
+	 * 
+	 * @param moduleName
+	 *            The name of the module
+	 * @param routes
+	 *            The route mappings
+	 * @param defaultRoute
+	 *            The default route
+	 * @param lineSeparator
+	 *            The line separator
+	 * @return The content of the application file.
+	 */
+	public String createApplication(String moduleName, List<AngularJSRouteMapping> routes,
+			String defaultRoute, String lineSeparator) {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("/***********************************" + lineSeparator); //$NON-NLS-1$
+		stringBuilder.append(" * " + lineSeparator); //$NON-NLS-1$
+		stringBuilder.append(" ***********************************/" + lineSeparator); //$NON-NLS-1$
+		stringBuilder.append(lineSeparator);
+		stringBuilder.append("'use string;'" + lineSeparator); //$NON-NLS-1$
+		stringBuilder.append("" + lineSeparator); //$NON-NLS-1$
+		stringBuilder.append("/*jslint index: 2*/" + lineSeparator); //$NON-NLS-1$
+		stringBuilder.append("/*global angular*/" + lineSeparator); //$NON-NLS-1$
+		stringBuilder.append("" + lineSeparator); //$NON-NLS-1$
+		stringBuilder.append("/***********************************" + lineSeparator); //$NON-NLS-1$
+		stringBuilder.append(" * " + lineSeparator); //$NON-NLS-1$
+		stringBuilder.append(" ***********************************/" + lineSeparator); //$NON-NLS-1$
+		if (!routes.isEmpty() && defaultRoute != null && defaultRoute.length() > 0) {
+			stringBuilder.append("angular.module('" + moduleName + "'), [])" + lineSeparator); //$NON-NLS-1$ //$NON-NLS-2$
+			stringBuilder.append("  .config(['$routeProvider', function ($routeProvider) {" + lineSeparator); //$NON-NLS-1$
+			stringBuilder.append("    $routeProvider" + lineSeparator); //$NON-NLS-1$
+			for (AngularJSRouteMapping routeMapping : routes) {
+				stringBuilder.append("      .when('" + routeMapping.getRoute() + "', {" + lineSeparator); //$NON-NLS-1$ //$NON-NLS-2$
+				stringBuilder.append("        templateUrl: '" + routeMapping.getTemplateUrl() + "'," //$NON-NLS-1$ //$NON-NLS-2$
+						+ lineSeparator);
+				stringBuilder.append("        controller: '" + routeMapping.getControllerName() + "'" //$NON-NLS-1$ //$NON-NLS-2$
+						+ lineSeparator);
+				stringBuilder.append("      })" + lineSeparator); //$NON-NLS-1$
+			}
+			stringBuilder.append("      .otherwise({" + lineSeparator); //$NON-NLS-1$
+			stringBuilder.append("        redirectTo: '" + defaultRoute + "'" + lineSeparator); //$NON-NLS-1$ //$NON-NLS-2$
+			stringBuilder.append("      });" + lineSeparator); //$NON-NLS-1$
+			stringBuilder.append("  }]);" + lineSeparator); //$NON-NLS-1$
+		} else {
+			stringBuilder.append("angular.module('" + moduleName + "'), []);" + lineSeparator); //$NON-NLS-1$ //$NON-NLS-2$
+		}
+		return stringBuilder.toString();
+	}
+
+	/**
+	 * Returns the content of an AngularJS controller.
+	 * 
+	 * @param controllerName
+	 *            The name of the controller
+	 * @param moduleName
+	 *            The name of the module containing the controller
+	 * @param dependenciesName
+	 *            The name of the dependencies of this controller
+	 * @param lineSeparator
+	 *            The line separator
+	 * @return The content of an AngularJS controller
+	 */
+	public String createController(String controllerName, String moduleName, List<String> dependenciesName,
+			String lineSeparator) {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("/***********************************" + lineSeparator); //$NON-NLS-1$
+		stringBuilder.append(" * " + lineSeparator); //$NON-NLS-1$
+		stringBuilder.append(" ***********************************/" + lineSeparator); //$NON-NLS-1$
+		stringBuilder.append(lineSeparator);
+		stringBuilder.append("'use string;'" + lineSeparator); //$NON-NLS-1$
+		stringBuilder.append("" + lineSeparator); //$NON-NLS-1$
+		stringBuilder.append("/*jslint index: 2*/" + lineSeparator); //$NON-NLS-1$
+		stringBuilder.append("/*global angular*/" + lineSeparator); //$NON-NLS-1$
+		stringBuilder.append("" + lineSeparator); //$NON-NLS-1$
+		stringBuilder.append("/***********************************" + lineSeparator); //$NON-NLS-1$
+		stringBuilder.append(" * " + lineSeparator); //$NON-NLS-1$
+		stringBuilder.append(" ***********************************/" + lineSeparator); //$NON-NLS-1$
+
+		StringBuilder dependencies = new StringBuilder("[");
+		int count = 1;
+		for (String dependencyName : dependenciesName) {
+			dependencies.append("'" + dependencyName + "'");
+			if (count != dependenciesName.size()) {
+				dependencies.append(", ");
+			}
+			count++;
+		}
+		dependencies.append(", function (");
+		count = 1;
+		for (String dependencyName : dependenciesName) {
+			dependencies.append(dependencyName);
+			if (count != dependenciesName.size()) {
+				dependencies.append(", ");
+			}
+			count++;
+		}
+		dependencies.append(") {");
+
+		stringBuilder.append("angular.module('" + moduleName + "').controller('" + controllerName + "', "
+				+ dependencies + lineSeparator);
+		stringBuilder.append("}]);" + lineSeparator); //$NON-NLS-1$
+
+		return stringBuilder.toString();
+	}
+
+	public String createDirective(String moduleName, List<String> modulesDependencies,
+			List<String> dependenciesName) {
+		StringBuilder stringBuilder = new StringBuilder();
+		return stringBuilder.toString();
+	}
+
+	public String createService(String moduleName, List<String> moduleDependencies, String serviceName,
+			List<String> dependenciesName) {
+		StringBuilder stringBuilder = new StringBuilder();
+		return stringBuilder.toString();
+	}
+
+	public String createPackageJson() {
+		StringBuilder stringBuilder = new StringBuilder();
+		return stringBuilder.toString();
+	}
+
+	public String createGruntJs() {
+		StringBuilder stringBuilder = new StringBuilder();
+		return stringBuilder.toString();
+	}
+
+	public String createTestsconfiguration() {
+		StringBuilder stringBuilder = new StringBuilder();
+		return stringBuilder.toString();
+	}
+
+	public String createMainScss() {
+		StringBuilder stringBuilder = new StringBuilder();
+		return stringBuilder.toString();
+	}
+
+	public String createMainView() {
+		StringBuilder stringBuilder = new StringBuilder();
+		return stringBuilder.toString();
+	}
+
+	public String createIndexHtml() {
+		StringBuilder stringBuilder = new StringBuilder();
+		return stringBuilder.toString();
 	}
 }

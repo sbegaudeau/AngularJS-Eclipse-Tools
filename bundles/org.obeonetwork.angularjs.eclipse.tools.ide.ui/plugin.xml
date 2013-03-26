@@ -4,19 +4,71 @@
    <extension
          point="org.eclipse.ui.newWizards">
       <category
-            id="org.obeonetwork.angularjs.eclipse.tools.ide.ui.category"
+            id="org.obeonetwork.angularjs.eclipse.tools.ide.ui.wizards.category"
             name="%AngularJS-Wizard-Category-Name">
       </category>
       <wizard
-            category="org.obeonetwork.angularjs.eclipse.tools.ide.ui.category"
+            category="org.obeonetwork.angularjs.eclipse.tools.ide.ui.wizards.category"
             class="org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.wizards.project.AngularJSProjectWizard"
+            finalPerspective="org.obeonetwork.angularjs.eclipse.tools.ide.ui.perspective"
             hasPages="true"
             icon="icons/wizards/AngularJS-Wizard-Project-Icon.png"
-            id="org.obeonetwork.angularjs.eclipse.tools.ide.ui.project"
+            id="org.obeonetwork.angularjs.eclipse.tools.ide.ui.wizards.project"
             name="%AngularJS-Wizard-Project-Name"
+            preferredPerspectives="org.obeonetwork.angularjs.eclipse.tools.ide.ui.perspective"
             project="true">
          <description>
             %AngularJS-Wizard-Project-Description
+         </description>
+      </wizard>
+      <wizard
+            category="org.obeonetwork.angularjs.eclipse.tools.ide.ui.wizards.category"
+            class="org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.wizards.application.AngularJSApplicationWizard"
+            finalPerspective="org.obeonetwork.angularjs.eclipse.tools.ide.ui.perspective"
+            hasPages="true"
+            icon="icons/wizards/AngularJS-Wizard-Application-Icon.png"
+            id="org.obeonetwork.angularjs.eclipse.tools.ide.ui.wizards.application"
+            name="%AngularJS-Wizard-Application-Name"
+            preferredPerspectives="org.obeonetwork.angularjs.eclipse.tools.ide.ui.perspective"
+            project="false">
+         <description>
+            %AngularJS-Wizard-Application-Description
+         </description>
+      </wizard>
+      <wizard
+            category="org.obeonetwork.angularjs.eclipse.tools.ide.ui.wizards.category"
+            class="org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.wizards.directive.AngularJSDirectiveWizard"
+            finalPerspective="org.obeonetwork.angularjs.eclipse.tools.ide.ui.perspective"
+            icon="icons/wizards/AngularJS-Wizard-Directive-Icon.png"
+            id="org.obeonetwork.angularjs.eclipse.tools.ide.ui.wizards.directive"
+            name="%AngularJS-Wizard-Directive-Name"
+            preferredPerspectives="org.obeonetwork.angularjs.eclipse.tools.ide.ui.perspective">
+         <description>
+            %AngularJS-Wizard-Directive-Description
+         </description>
+      </wizard>
+      <wizard
+            category="org.obeonetwork.angularjs.eclipse.tools.ide.ui.wizards.category"
+            class="org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.wizards.controller.AngularJSControllerWizard"
+            finalPerspective="org.obeonetwork.angularjs.eclipse.tools.ide.ui.perspective"
+            icon="icons/wizards/AngularJS-Wizard-Controller-Icon.png"
+            id="org.obeonetwork.angularjs.eclipse.tools.ide.ui.wizards.controller"
+            name="%AngularJS-Wizard-Controller-Name"
+            preferredPerspectives="org.obeonetwork.angularjs.eclipse.tools.ide.ui.perspective">
+         <description>
+            %AngularJS-Wizard-Controller-Description
+         </description>
+      </wizard>
+      <wizard
+            category="org.obeonetwork.angularjs.eclipse.tools.ide.ui.wizards.category"
+            class="org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.wizards.service.AngularJSServiceWizard"
+            finalPerspective="org.obeonetwork.angularjs.eclipse.tools.ide.ui.perspective"
+            icon="icons/wizards/AngularJS-Wizard-Service-Icon.png"
+            id="org.obeonetwork.angularjs.eclipse.tools.ide.ui.wizards.service"
+            name="%AngularJS-Wizard-Service-Name"
+            preferredPerspectives="org.obeonetwork.angularjs.eclipse.tools.ide.ui.perspective">
+         <description>
+            %AngularJS-Wizard-Service-Description
          </description>
       </wizard>
    </extension>
@@ -27,6 +79,28 @@
             id="org.obeonetwork.angularjs.eclipse.tools.ide.ui.image"
             natureId="org.obeonetwork.angularjs.eclipse.tools.nature">
       </image>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.perspective.AngularJSPerspectiveFactory"
+            icon="icons/perspective/AngularJS-Perspective-Icon.png"
+            id="org.obeonetwork.angularjs.eclipse.tools.ide.ui.perspective"
+            name="%AngularJS-Perspective-Name">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.editors.packagejson.AngularJSPackageJsonEditor"
+            contributorClass="org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.editors.packagejson.AngularJSPackageJsonEditorContributor"
+            default="true"
+            filenames="%AngularJS-PackageJsonEditor-Filename"
+            icon="icons/editors/AngularJS-PackageJsonEditor-Icon.png"
+            id="org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.editors.packagejson.AngularJSPackageJsonEditor"
+            matchingStrategy="org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.editors.packagejson.AngularJSPackageJsonEditorMatchingStrategy"
+            name="%AngularJS-PackageJsonEditor-Name">
+      </editor>
    </extension>
 
 </plugin>
