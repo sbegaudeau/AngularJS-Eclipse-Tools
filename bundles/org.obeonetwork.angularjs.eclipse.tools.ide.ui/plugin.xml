@@ -23,16 +23,16 @@
       </wizard>
       <wizard
             category="org.obeonetwork.angularjs.eclipse.tools.ide.ui.wizards.category"
-            class="org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.wizards.application.AngularJSApplicationWizard"
+            class="org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.wizards.module.AngularJSModuleWizard"
             finalPerspective="org.obeonetwork.angularjs.eclipse.tools.ide.ui.perspective"
             hasPages="true"
-            icon="icons/wizards/AngularJS-Wizard-Application-Icon.png"
-            id="org.obeonetwork.angularjs.eclipse.tools.ide.ui.wizards.application"
-            name="%AngularJS-Wizard-Application-Name"
+            icon="icons/wizards/AngularJS-Wizard-Module-Icon.png"
+            id="org.obeonetwork.angularjs.eclipse.tools.ide.ui.wizards.module"
+            name="%AngularJS-Wizard-Module-Name"
             preferredPerspectives="org.obeonetwork.angularjs.eclipse.tools.ide.ui.perspective"
             project="false">
          <description>
-            %AngularJS-Wizard-Application-Description
+            %AngularJS-Wizard-Module-Description
          </description>
       </wizard>
       <wizard
@@ -101,6 +101,18 @@
             matchingStrategy="org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.editors.packagejson.AngularJSPackageJsonEditorMatchingStrategy"
             name="%AngularJS-PackageJsonEditor-Name">
       </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.navigator.navigatorContent">
+      <navigatorContent
+            activeByDefault="true"
+            contentProvider="org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.cnf.project.AngularJSProjectCNFContentProvider"
+            icon="icons/cnf/project/AngularJS-Project-CNF-Icon.png"
+            id="org.obeonetwork.angularjs.eclipse.tools.ide.ui.angularJSProjectNavigatorContent"
+            labelProvider="org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.cnf.project.AngularJSProjectCNFLabelProvider"
+            name="%AngularJS-Project-Navigator-Content-Name"
+            priority="highest">
+      </navigatorContent>
    </extension>
 
 </plugin>

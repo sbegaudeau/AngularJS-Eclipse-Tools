@@ -14,14 +14,15 @@ Require-Bundle: org.eclipse.core.runtime,
  org.obeonetwork.angularjs.eclipse.tools.ide.core;bundle-version="1.0.0",
  org.eclipse.jface.text,
  org.eclipse.ui.editors,
- com.google.gson
+ com.google.gson,
+ org.eclipse.ui.navigator
 Bundle-Activator: org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.AngularJSIDEUIPlugin
 Bundle-ActivationPolicy: lazy
 Export-Package: org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal;version="1.0.0";x-internal:=true,
  org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.editors.packagejson;version="1.0.0";x-internal:=true,
  org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.perspective;version="1.0.0";x-internal:=true,
- org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.wizards.application;version="1.0.0";x-internal:=true,
  org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.wizards.controller;version="1.0.0";x-internal:=true,
  org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.wizards.directive;version="1.0.0";x-internal:=true,
+ org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.wizards.module;version="1.0.0";x-internal:=true,
  org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.wizards.project;version="1.0.0";x-internal:=true,
  org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.wizards.service;version="1.0.0";x-internal:=true

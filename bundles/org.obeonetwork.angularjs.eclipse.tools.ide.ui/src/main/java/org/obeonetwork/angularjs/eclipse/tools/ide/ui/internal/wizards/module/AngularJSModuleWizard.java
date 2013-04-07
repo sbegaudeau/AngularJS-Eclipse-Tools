@@ -8,7 +8,7 @@
  * Contributors:
  *     Stephane Begaudeau (Obeo) - initial API and implementation
  *******************************************************************************/
-package org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.wizards.service;
+package org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.wizards.module;
 
 import java.io.ByteArrayInputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -31,7 +31,7 @@ import org.obeonetwork.angularjs.eclipse.tools.ide.ui.internal.AngularJSIDEUIPlu
 /**
  * @author <a href="mailto:stephane.begaudeau@obeo.fr">Stephane Begaudeau</a>
  */
-public class AngularJSServiceWizard extends Wizard implements INewWizard {
+public class AngularJSModuleWizard extends Wizard implements INewWizard {
 
 	/**
 	 * The current selection when the wizard was opened.
@@ -39,10 +39,10 @@ public class AngularJSServiceWizard extends Wizard implements INewWizard {
 	private IStructuredSelection selection;
 
 	/**
-	 * The first page of the wizard where the user will enter the name of the service along with its
+	 * The first page of the wizard where the user will enter the name of the module along with its
 	 * container's path.
 	 */
-	private AngularJSServiceDescriptionWizardPage angularJSServiceDescriptionWizardPage;
+	private AngularJSModuleDescriptionWizardPage angularJSModuleDescriptionWizardPage;
 
 	/**
 	 * {@inheritDoc}
@@ -62,8 +62,8 @@ public class AngularJSServiceWizard extends Wizard implements INewWizard {
 	 */
 	@Override
 	public void addPages() {
-		this.angularJSServiceDescriptionWizardPage = new AngularJSServiceDescriptionWizardPage(this.selection);
-		this.addPage(this.angularJSServiceDescriptionWizardPage);
+		this.angularJSModuleDescriptionWizardPage = new AngularJSModuleDescriptionWizardPage(this.selection);
+		this.addPage(this.angularJSModuleDescriptionWizardPage);
 	}
 
 	/**
@@ -79,10 +79,10 @@ public class AngularJSServiceWizard extends Wizard implements INewWizard {
 				@Override
 				public void run(IProgressMonitor monitor) throws InvocationTargetException,
 						InterruptedException {
-					String content = angularJSServiceDescriptionWizardPage.getServiceFileContent();
-					IContainer container = angularJSServiceDescriptionWizardPage.getFileContainer();
-					IFile file = container.getFile(new Path(angularJSServiceDescriptionWizardPage
-							.getServiceName().toLowerCase()
+					String content = angularJSModuleDescriptionWizardPage.getModuleFileContent();
+					IContainer container = angularJSModuleDescriptionWizardPage.getFileContainer();
+					IFile file = container.getFile(new Path(angularJSModuleDescriptionWizardPage
+							.getModuleName().toLowerCase()
 							+ ".js"));
 					try {
 						file.create(new ByteArrayInputStream(content.getBytes()), true, monitor);
@@ -100,4 +100,5 @@ public class AngularJSServiceWizard extends Wizard implements INewWizard {
 		}
 		return true;
 	}
+
 }

@@ -13,12 +13,24 @@ public class AngularJSPackageJsonEditor extends FormEditor {
 	/**
 	 * {@inheritDoc}
 	 * 
+	 * @see org.eclipse.ui.part.WorkbenchPart#getTitle()
+	 */
+	@Override
+	public String getTitle() {
+		return "package.json";
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
 	 * @see org.eclipse.ui.forms.editor.FormEditor#addPages()
 	 */
 	@Override
 	protected void addPages() {
 		try {
 			this.addPage(new AngularJSPackageJsonOverviewFormPage(this));
+			this.addPage(new AngularJSPackageJsonDependenciesFormPage(this));
+			this.addPage(new AngularJSPackageJsonDevelopmentFormPage(this));
 			// this.addPage(this.createDependenciesFormPage());
 			// this.addPage(this.createDevelopmentDependenciesFormPage());
 			// this.addPage(this.createTextEditorPage());
